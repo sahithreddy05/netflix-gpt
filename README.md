@@ -3,6 +3,8 @@
 - Configured TailwindCSS
 - Header
 - Login Form
+- Sign up Form
+- Form Validation
 
 # Features
 - Login & SignUp
