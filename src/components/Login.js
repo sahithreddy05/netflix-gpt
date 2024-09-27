@@ -6,6 +6,7 @@ import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
 
@@ -31,17 +32,16 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: name.current.value, photoURL: 'https://occ-0-1001-1722.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABZ2z43VE0jS_qN36DHgArVH-Qa4NwE5AwIZ09Faod0oGh07vVF0NKbJ2UhaMe-gma9HnYPC4OH1wzfLLrC2cKBpDBf4dpPI.png?r=c9f'
+                        displayName: name.current.value, photoURL: USER_AVATAR
                     }).then(() => {
                         const { uid, email, displayname, photoURL } = auth.currentUser;
                         dispatch(addUser({ uid: uid, email: email, displayname: displayname, photoURL: photoURL }));
                         // Profile updated!
-                        navigate("/browse");
+                        // navigate("/browse");
                     }).catch((error) => {
                         // An error occurred
                         setErrorMessage(error.message);
                     });
-                    console.log(user);
 
                 })
                 .catch((error) => {
@@ -55,7 +55,6 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log(user);
                     navigate("/browse");
                 })
                 .catch((error) => {
